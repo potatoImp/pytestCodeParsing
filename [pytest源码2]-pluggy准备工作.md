@@ -2,7 +2,8 @@
 ###### 简单了解了pluggy之后，我们还需要再了解些知识，为解读代码逻辑做准备
 ##### 个人拙见，有错请各位指出。
 ###### _如果的我的文章对您有帮助，不符动动您的金手指给个Star，予人玫瑰，手有余香，不胜感激。_
-<br/>
+</br>
+</br>
 
 ## hook和plugin的关系
 #### hook和plugin是`1:N`的对应关系，假设同时注册了多个实现了同一hook的plugin，则会对应的返回多个结果。
@@ -48,6 +49,7 @@ print(pm.hook.calculate(a=2, b=3))
 * #### 在Demo2中，我们注册了两个`plugin`，`HookImpl1`和`HookImpl2`，分别实现了加法和乘法两个逻辑。
 * #### 每次调用hook都会返回两个`plugin`执行的结果，先执行后注册的`HookImpl2`，再执行先注册的`HookImpl1`,即越晚注册的plugin越先执行。
 
+<br/>
 <br/>
 
 ## Plugin的调用顺序与参数
@@ -101,6 +103,8 @@ print(pm.hook.calculate(a=2, b=3))
 * #### trylast - 如果trylast值为True，则此plugin会相应地尽可能晚的在1:N的实现链中执行
 * #### hookwrapper - 如果该参数为True，需要在plugin内实现一个yield，plugin执行时先执行wrapper plugin前面部分的逻辑，然后转去执行其他plugin，最后再回来执行wrapper plugin后面部分的逻辑。
 * #### optionalhook - 如果该参数为True，在此plugin缺少相匹配的hook时，不会报error（spec is found）。
+
+</br>
 
 ### tryfirst的Demo
 ##### 我们修改一下demo3，把HookImpl1加上tryfirst=True参数，即可达到先执行先注册的HookImpl1。

@@ -1,19 +1,19 @@
-#前言
+# 前言
 ###### 最近可能遇到了人生的低谷了，事情都不太顺心。打算好好研究下pytest的源码。之前一直想做，但迟迟没有开始，这次下定决心完成它吧。
 ##### 个人拙见，有错请各位指出。
 
-####源码这个东西怎么入手还是挺讲究的，我打算从pytest的核心框架Python Plugin出发，首先介绍下Pluggy。
+#### 源码这个东西怎么入手还是挺讲究的，我打算从pytest的核心框架Python Plugin出发，首先介绍下Pluggy。
 
-##Pluggy
-####[官方](https://github.com/pytest-dev/pluggy "标题")是这么介绍Pluggy的 
+## Pluggy
+#### [官方](https://github.com/pytest-dev/pluggy "标题")是这么介绍Pluggy的 
 **"This is the core framework used by the `pytest`, `tox`, and `devpi` projects."**
 
 **“这是`pytest`、`tox`和`devpi`项目使用的核心框架。”**
-####很显然，这就是我们研究pytest源码要选择它入手的原因。
+#### 很显然，这就是我们研究pytest源码要选择它入手的原因。
 
-##第一个Demo
-####Pluggy一开始是作为Pytest源码的一部分存在的，但在后期被分离出来，作为一个外部的依赖来使用。
-###我们由一个Demo来认识它，代码如下：
+## 第一个Demo
+#### Pluggy一开始是作为Pytest源码的一部分存在的，但在后期被分离出来，作为一个外部的依赖来使用。
+### 我们由一个Demo来认识它，代码如下：
 
 ```
 # -*- coding:utf-8 -*-

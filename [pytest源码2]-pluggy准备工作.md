@@ -48,7 +48,9 @@ print(pm.hook.calculate(a=2, b=3))
 * #### 在Demo2中，我们注册了两个`plugin`，`HookImpl1`和`HookImpl2`，分别实现了加法和乘法两个逻辑。
 * #### 每次调用hook都会返回两个`plugin`执行的结果，先执行后注册的`HookImpl2`，再执行先注册的`HookImpl1`,即越晚注册的plugin越先执行。
 
-## Plugin的调用顺序
+<br/>
+
+## Plugin的调用顺序与参数
 ### HookspecMarker装饰器参数
 #### HookspckMarker装饰器支持传入一些特定的参数，常用的有
 * ##### firstresult - 如果firstresult值为True时，获取第一个plugin执行结果后就停止（中断）继续执行。

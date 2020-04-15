@@ -60,8 +60,8 @@ print(pm.hook.calculate(a=2, b=3))
 
 ### HookspecMarker装饰器参数
 #### HookspckMarker装饰器支持传入一些特定的参数，常用的有
-* #### firstresult - 如果firstresult值为True时，获取第一个plugin执行结果后就停止（中断）继续执行。
-* #### historic - 如果值为True时，表示这个hook是需要保存调用记录（call history）的，并将该调用记录回放在未来新注册的plugins上。
+*  firstresult - 如果firstresult值为True时，获取第一个plugin执行结果后就停止（中断）继续执行。
+*  historic - 如果值为True时，表示这个hook是需要保存调用记录（call history）的，并将该调用记录回放在未来新注册的plugins上。
 #### 当装饰器传入了firstresult=True时，plugin的执行会在后注册的HookImpl2执行完毕后停止，不再往下执行。
 ### Demo如下
 ```
@@ -107,10 +107,10 @@ print(pm.hook.calculate(a=2, b=3))
 
 ### HookimplMarker装饰器参数
 #### HookimplMarker装饰器支持传入一些特定的参数，常用的有
-* #### tryfirst - 如果tryfirst值为True，则此plugin会尽可能早的在1:N的实现链路执行
-* #### trylast - 如果trylast值为True，则此plugin会相应地尽可能晚的在1:N的实现链中执行
-* #### hookwrapper - 如果该参数为True，需要在plugin内实现一个yield，plugin执行时先执行wrapper plugin前面部分的逻辑，然后转去执行其他plugin，最后再回来执行wrapper plugin后面部分的逻辑。
-* #### optionalhook - 如果该参数为True，在此plugin缺少相匹配的hook时，不会报error（spec is found）。
+*  tryfirst - 如果tryfirst值为True，则此plugin会尽可能早的在1:N的实现链路执行
+*  trylast - 如果trylast值为True，则此plugin会相应地尽可能晚的在1:N的实现链中执行
+*  hookwrapper - 如果该参数为True，需要在plugin内实现一个yield，plugin执行时先执行wrapper plugin前面部分的逻辑，然后转去执行其他plugin，最后再回来执行wrapper plugin后面部分的逻辑。
+*  optionalhook - 如果该参数为True，在此plugin缺少相匹配的hook时，不会报error（spec is found）。
 
 </br>
 </br>
@@ -217,6 +217,6 @@ After yield,result is [6, 5]
 [6, 5]
 ```
 ### 解析：
-* #### `ImplWrapper`中的`pluggy`的代码逻辑，以`result = yield` 为分割线，分成两个部分。第一部分执行完毕后，中断继续执行，转去执行其他`plugin`，待其他`plugin`都执行完时，回来继续执行剩下的部分。
-* #### `result = yield`result通过yield来获取到其他plugin执行的结果，即非`wrapper plugin`的执行结果（`HookImpl2`和`HookImpl1`）
-* #### 从Output中可以看出，我们`WrapperPluggy`的返回结果没有被打印出来，这是因为`wrapper plugin`的返回值会被`Ignore`，原因后续会提到。
+*  `ImplWrapper`中的`pluggy`的代码逻辑，以`result = yield` 为分割线，分成两个部分。第一部分执行完毕后，中断继续执行，转去执行其他`plugin`，待其他`plugin`都执行完时，回来继续执行剩下的部分。
+*  `result = yield`result通过yield来获取到其他plugin执行的结果，即非`wrapper plugin`的执行结果（`HookImpl2`和`HookImpl1`）
+*  从Output中可以看出，我们`WrapperPluggy`的返回结果没有被打印出来，这是因为`wrapper plugin`的返回值会被`Ignore`，原因后续会提到。

@@ -116,7 +116,7 @@ print(pm.hook.calculate(a=2, b=3))
 </br>
 
 ### tryfirst的Demo
-##### 我们修改一下demo3，把HookImpl1加上tryfirst=True参数，即可达到先执行先注册的HookImpl1。
+#### 我们修改一下demo3，把HookImpl1加上tryfirst=True参数，即可达到先执行先注册的HookImpl1。
 ```
 # -*- coding:utf-8 -*-
 

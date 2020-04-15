@@ -17,7 +17,7 @@
 #### Pluggy一开始是作为Pytest源码的一部分存在的，在后期被分离出来了，作为一个外部的依赖来使用。
 ### 我们由一个Demo来认识它，代码如下：
 
-```
+```python
 # -*- coding:utf-8 -*-
 
 from pluggy import PluginManager, HookspecMarker, HookimplMarker
@@ -45,7 +45,7 @@ results = pm.hook.calculate(a=1, b=5)
 print(results)
 ```
 ### Output
-```
+```bash
 [6]
 ```
 ### 解析：

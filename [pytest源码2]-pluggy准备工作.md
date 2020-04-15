@@ -100,7 +100,8 @@ print(pm.hook.calculate(a=2, b=3))
 ```
 
 <br/>
-### HookimplMarker装饰器参数
+
+## HookimplMarker装饰器参数
 #### HookimplMarker装饰器支持传入一些特定的参数，常用的有
 * #### tryfirst - 如果tryfirst值为True，则此plugin会尽可能早的在1:N的实现链路执行
 * #### trylast - 如果trylast值为True，则此plugin会相应地尽可能晚的在1:N的实现链中执行
@@ -154,7 +155,6 @@ print(pm.hook.calculate(a=2, b=3))
 </br>
 
 ## hookwrapper
-***
 #### 我们实现一个特殊的plugin`WrapperPlugin`
 ```
 # -*- coding:utf-8 -*-

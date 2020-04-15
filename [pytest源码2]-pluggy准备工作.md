@@ -4,6 +4,7 @@
 ###### _如果的我的文章对您有帮助，不符动动您的金手指给个Star，予人玫瑰，手有余香，不胜感激。_
 </br>
 </br>
+</br>
 
 # hook和plugin的关系
 #### hook和plugin是`1:N`的对应关系，假设同时注册了多个实现了同一hook的plugin，则会对应的返回多个结果。
@@ -51,9 +52,11 @@ print(pm.hook.calculate(a=2, b=3))
 
 <br/>
 <br/>
+</br>
 
 # Plugin的调用顺序与参数
 <br/>
+</br>
 
 ## HookspecMarker装饰器参数
 #### HookspckMarker装饰器支持传入一些特定的参数，常用的有
@@ -100,6 +103,7 @@ print(pm.hook.calculate(a=2, b=3))
 ```
 
 <br/>
+</br>
 
 ## HookimplMarker装饰器参数
 #### HookimplMarker装饰器支持传入一些特定的参数，常用的有
@@ -108,6 +112,7 @@ print(pm.hook.calculate(a=2, b=3))
 * #### hookwrapper - 如果该参数为True，需要在plugin内实现一个yield，plugin执行时先执行wrapper plugin前面部分的逻辑，然后转去执行其他plugin，最后再回来执行wrapper plugin后面部分的逻辑。
 * #### optionalhook - 如果该参数为True，在此plugin缺少相匹配的hook时，不会报error（spec is found）。
 
+</br>
 </br>
 
 ## tryfirst的Demo

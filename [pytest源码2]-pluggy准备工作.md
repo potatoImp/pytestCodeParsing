@@ -9,7 +9,7 @@
 # hook和plugin的关系
 #### hook和plugin是`1:N`的对应关系，假设同时注册了多个实现了同一hook的plugin，则会对应的返回多个结果。
 ### Demo如下
-```
+```python
 # -*- coding:utf-8 -*-
 
 from pluggy import PluginManager, HookspecMarker, HookimplMarker

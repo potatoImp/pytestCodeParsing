@@ -47,8 +47,8 @@ print(pm.hook.calculate(a=2, b=3))
 [6, 5]
 ```
 ### 解析：
-* #### 在Demo2中，我们注册了两个`plugin`，`HookImpl1`和`HookImpl2`，分别实现了加法和乘法两个逻辑。
-* #### 每次调用hook都会返回两个`plugin`执行的结果，先执行后注册的`HookImpl2`，再执行先注册的`HookImpl1`,即越晚注册的plugin越先执行。(后续会讲原因)
+*  **在Demo2中，我们注册了两个`plugin`，`HookImpl1`和`HookImpl2`，分别实现了加法和乘法两个逻辑。**
+*  **每次调用hook都会返回两个`plugin`执行的结果，先执行后注册的`HookImpl2`，再执行先注册的`HookImpl1`,即越晚注册的plugin越先执行。(后续会讲原因)**
 
 <br/>
 <br/>

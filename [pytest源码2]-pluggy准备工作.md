@@ -8,7 +8,8 @@
 
 # hook和plugin的关系
 <font face="微软雅黑" size=6 >**hook和plugin是`1:N`的对应关系，假设同时注册了多个实现了同一hook的plugin，则会对应的返回多个结果。**</font>
-#### hook和plugin是`1:N`的对应关系，假设同时注册了多个实现了同一hook的plugin，则会对应的返回多个结果。
+
+<font face="微软雅黑" size=1 >**Demo如下**</font>
 ### Demo如下
 ```
 # -*- coding:utf-8 -*-

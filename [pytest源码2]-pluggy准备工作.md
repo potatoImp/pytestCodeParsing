@@ -55,7 +55,7 @@ print(pm.hook.calculate(a=2, b=3))
 # Plugin的调用顺序与参数
 <br/>
 
-### HookspecMarker装饰器参数
+## HookspecMarker装饰器参数
 #### HookspckMarker装饰器支持传入一些特定的参数，常用的有
 * ##### firstresult - 如果firstresult值为True时，获取第一个plugin执行结果后就停止（中断）继续执行。
 * ##### historic - 如果值为True时，表示这个hook是需要保存调用记录（call history）的，并将该调用记录回放在未来新注册的plugins上。
@@ -109,7 +109,7 @@ print(pm.hook.calculate(a=2, b=3))
 
 </br>
 
-### tryfirst的Demo
+## tryfirst的Demo
 ##### 我们修改一下demo3，把HookImpl1加上tryfirst=True参数，即可达到先执行先注册的HookImpl1。
 ```
 # -*- coding:utf-8 -*-
@@ -153,7 +153,7 @@ print(pm.hook.calculate(a=2, b=3))
 
 </br>
 
-### hookwrapper
+## hookwrapper
 ***
 #### 我们实现一个特殊的plugin`WrapperPlugin`
 ```

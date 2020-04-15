@@ -43,7 +43,7 @@ pm.register(HookImpl2())
 print(pm.hook.calculate(a=2, b=3))
 ```
 ### Output
-```buildoutcfg
+```bash
 [6, 5]
 ```
 ### 解析：
@@ -98,7 +98,7 @@ pm.register(HookImpl2())
 print(pm.hook.calculate(a=2, b=3))
 ```
 ### Output
-```
+```bash
 6
 ```
 
@@ -117,7 +117,7 @@ print(pm.hook.calculate(a=2, b=3))
 
 ### tryfirst的Demo
 #### 我们修改一下demo3，把HookImpl1加上tryfirst=True参数，即可达到先执行先注册的HookImpl1。
-```
+```python
 # -*- coding:utf-8 -*-
 
 from pluggy import PluginManager, HookspecMarker, HookimplMarker
@@ -152,7 +152,7 @@ print(pm.hook.calculate(a=2, b=3))
 ```
 ### Output
 
-``` 
+```bash 
 [5, 6]
 ```
 #### trylast以此类推，携带者变为后执行
@@ -161,7 +161,7 @@ print(pm.hook.calculate(a=2, b=3))
 
 ### hookwrapper
 #### 我们实现一个特殊的plugin`WrapperPlugin`
-```
+```python
 # -*- coding:utf-8 -*-
 
 from pluggy import PluginManager, HookspecMarker, HookimplMarker
@@ -208,7 +208,7 @@ pm.register(WrapperPluggy())
 print(pm.hook.calculate(a=2, b=3))
 ```
 ### Output
-```
+```bash
 WrapperPluggy execute!
 Before yield
 HookImpl2 execute!

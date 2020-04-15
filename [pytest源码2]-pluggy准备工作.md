@@ -43,7 +43,7 @@ pm.register(HookImpl2())
 print(pm.hook.calculate(a=2, b=3))
 ```
 ### Output
-```
+```sybase
 [6, 5]
 ```
 ### 解析：
@@ -60,11 +60,11 @@ print(pm.hook.calculate(a=2, b=3))
 
 ### HookspecMarker装饰器参数
 #### HookspckMarker装饰器支持传入一些特定的参数，常用的有
-*  firstresult - 如果firstresult值为True时，获取第一个plugin执行结果后就停止（中断）继续执行。
-*  historic - 如果值为True时，表示这个hook是需要保存调用记录（call history）的，并将该调用记录回放在未来新注册的plugins上。
+*  **firstresult - 如果firstresult值为True时，获取第一个plugin执行结果后就停止（中断）继续执行。**
+*  **historic - 如果值为True时，表示这个hook是需要保存调用记录（call history）的，并将该调用记录回放在未来新注册的plugins上。**
 #### 当装饰器传入了firstresult=True时，plugin的执行会在后注册的HookImpl2执行完毕后停止，不再往下执行。
 ### Demo如下
-```
+```python
 # -*- coding:utf-8 -*-
 
 from pluggy import PluginManager, HookspecMarker, HookimplMarker

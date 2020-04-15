@@ -53,6 +53,8 @@ print(pm.hook.calculate(a=2, b=3))
 <br/>
 
 ## Plugin的调用顺序与参数
+<br/>
+
 ### HookspecMarker装饰器参数
 #### HookspckMarker装饰器支持传入一些特定的参数，常用的有
 * ##### firstresult - 如果firstresult值为True时，获取第一个plugin执行结果后就停止（中断）继续执行。
@@ -97,6 +99,7 @@ print(pm.hook.calculate(a=2, b=3))
 6
 ```
 
+<br/>
 ### HookimplMarker装饰器参数
 #### HookimplMarker装饰器支持传入一些特定的参数，常用的有
 * #### tryfirst - 如果tryfirst值为True，则此plugin会尽可能早的在1:N的实现链路执行
@@ -106,7 +109,7 @@ print(pm.hook.calculate(a=2, b=3))
 
 </br>
 
-### tryfirst的Demo
+## tryfirst的Demo
 ##### 我们修改一下demo3，把HookImpl1加上tryfirst=True参数，即可达到先执行先注册的HookImpl1。
 ```
 # -*- coding:utf-8 -*-
@@ -142,14 +145,15 @@ pm.register(HookImpl2())
 print(pm.hook.calculate(a=2, b=3))
 ```
 ### Output
-```
+
+``` 
 [5, 6]
 ```
 #### trylast以此类推，携带者变为后执行
 
 </br>
 
-### hookwrapper
+## hookwrapper
 #### 我们实现一个特殊的plugin`WrapperPlugin`
 ```
 # -*- coding:utf-8 -*-
@@ -206,7 +210,7 @@ HookImpl1 execute!
 After yield,result is [6, 5]
 [6, 5]
 ```
-#### 解析：
+### 解析：
 * ##### `ImplWrapper`中的`pluggy`的代码逻辑，以`result = yield` 为分割线，分成两个部分。第一部分执行完毕后，中断继续执行，转去执行其他`plugin`，待其他`plugin`都执行完时，回来继续执行剩下的部分。
 * ##### `result = yield`result通过yield来获取到其他plugin执行的结果，即非`wrapper plugin`的执行结果（`HookImpl2`和`HookImpl1`）
 * ##### 从Output中可以看出，我们`WrapperPluggy`的返回结果没有被打印出来，这是因为`wrapper plugin`的返回值会被`Ignore`，原因后续会提到。

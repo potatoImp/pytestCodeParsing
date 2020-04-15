@@ -43,7 +43,7 @@ pm.register(HookImpl2())
 print(pm.hook.calculate(a=2, b=3))
 ```
 ### Output
-```sybase
+```bash
 [6, 5]
 ```
 ### ½âÎö£º

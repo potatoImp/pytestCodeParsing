@@ -84,7 +84,7 @@
               assert spec_opts is not None
               self.set_specification(specmodule_or_class, spec_opts)
  ```
-  * ##### 在register逻辑中，我们传入的参数是name与self._hookexec(hook_execute)，其中hook_execute表示的是一个函数对象，负责实际plugin的调用
+  * **在register逻辑中，我们传入的参数是name与self._hookexec(hook_execute)，其中hook_execute表示的是一个函数对象，负责实际plugin的调用**
 ```python
     def has_spec(self):
         return self.spec is not None

@@ -6,7 +6,15 @@
 </br>
 </br>
 
-# `pm.add_hookspecs(HookSpec)`是怎么实现的？
+# pluggy核心逻辑
+```python
+pm = PluginManager("myPluggyDemo")
+pm.add_hookspecs(HookSpec)
+pm.register(HookImpl1())
+pm.hook.calculate(a=2, b=3)
+```
+
+## `pm.add_hookspecs(HookSpec)`是怎么实现的？
 
 </br>
 

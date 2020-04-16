@@ -14,6 +14,9 @@ pm.register(HookImpl1())
 pm.hook.calculate(a=2, b=3)
 ```
 
+<br/>
+<br/>
+
 ## `pm.add_hookspecs(HookSpec)`是怎么实现的？
 
 </br>

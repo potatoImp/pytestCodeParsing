@@ -117,6 +117,9 @@ def parse_hookspec_opts(self, module_or_class, name):        #2.1ÄÃµ½¸ÃÊôĞÔµÄ·½·
     method = getattr(module_or_class, name)        #´Ë´¦»ñÈ¡µ½ÎÒÃÇÖ®Ç°¶¨ÒåµÄhook·½·¨
     return getattr(method, self.project_name + "_spec", None)        #´Ë´¦»ñÈ¡µ½Îª¸Ã·½·¨ĞÂÔöµÄÊôĞÔproject_name + _spec
  ```
+ 
+ <br/>
+ 
 2. #### pm.register`µÄ×÷ÓÃÊÇ×¢²áÒ»¸öpluggyµÄÊµÏÖ²¢½«ÆäÓë¶ÔÓ¦µÄhook¹ØÁªÆğÀ´£¬ÎÒÃÇÀ´¿´Ö÷Òª´úÂë
 ```python
 # register matching hook implementations of the plugin

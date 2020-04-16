@@ -18,9 +18,8 @@ pm.hook.calculate(a=2, b=3)
 <br/>
 
 
-# `PluginManager.hook.method()`是怎么实现的？
-
-### Demo中的pm.hook是什么？实现调用pluggy的逻辑是什么？
+# 3.`PluginManager.hook.method()`是怎么实现的？
+**Demo中的pm.hook是什么？实现调用pluggy的逻辑是什么？**
 #### 这里就涉及到了上一步的`_HookCaller`了，`pm.hook.calculate`其实是相当于获取了对应`_HookCaller`，调用的是他的`__call__`方法，来看下代码
 ```python
     def __call__(self, *args, **kwargs):

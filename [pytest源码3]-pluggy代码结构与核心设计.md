@@ -110,6 +110,7 @@ pm.hook.calculate(a=2, b=3)
 2. #### `pm.register(HookImpl1())`ÊÇÔõÃ´ÊµÏÖµÄ£¿
 3. #### `pm.hook.calculate(a=2, b=3)`ÊÇÔõÃ´ÊµÏÖµÄ£¿
 
+<br/><br/>
 
 ### 1.`PluginManager.add_hookspecs()`ÊÇÔõÃ´ÊµÏÖµÄ£¿
 **DemoÖĞµÄ`pm.add_hookspecs(HookSpec)`ÊÇÔõÃ´ÊµÏÖµÄ£¿**
@@ -130,7 +131,7 @@ def parse_hookspec_opts(self, module_or_class, name):        #2.1ÄÃµ½¸ÃÊôĞÔµÄ·½·
     return getattr(method, self.project_name + "_spec", None)        #´Ë´¦»ñÈ¡µ½Îª¸Ã·½·¨ĞÂÔöµÄÊôĞÔproject_name + _spec
  ```
  
- <br/>
+<br/><br/>
  
 ### 2.`PluginManager.register()`ÊÇÔõÃ´ÊµÏÖµÄ£¿
 **DemoÖĞµÄ`pm.register(HookImpl1())`ÊÇÔõÃ´ÊµÏÖµÄ£¿**
@@ -160,7 +161,7 @@ for name in dir(plugin):
   - **ÔÙ°ÑÒ»¸ö`_HookCaller`µÄ¶ÔÏóÌí¼Óµ½`hook`ÖĞ£¬²¢Îª`self.hook`ĞÂÔöÒ»¸övalueÎª`hook`£¬nameÎª`method`µÄÊôĞÔ£¨±ÈÈçÇ°ÃæµÄdemoµÄ`calculate`£©**
   - **×îºó½«±éÀúÕÒµ½µÄÃ¿Ò»¸ö`_HookCaller`Ìí¼Óµ½hookcallers,ÒÔ´ıµ÷ÓÃ**
 
-<br/>
+<br/><br/>
 
 ### 3.`PluginManager.hook.method()`ÊÇÔõÃ´ÊµÏÖµÄ£¿
 **pm.hookÊÇÊ²Ã´£¿ÊµÏÖµ÷ÓÃpluggyµÄÂß¼­ÊÇÊ²Ã´£¿**

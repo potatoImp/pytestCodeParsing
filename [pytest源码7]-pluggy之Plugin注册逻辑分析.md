@@ -25,21 +25,21 @@
   * **self._pluginhookcallers是以plugin object为key的dict**
   * **通过上述两个dict来判断传入的plugin是否已经注册过了**
  
-<br/> 
+<br/><br/>
  
 ```python
   self._name2plugin[plugin_name] = plugin
 ```
   * **将这个pluggy以`plugin_name:plugin object`的形式保存到`self._name2plugin`中**
   
-<br/> 
+<br/><br/>
 
 ```python
   self._plugin2hookcallers[plugin] = hookcallers = []
 ```
   * **创建一个`list`对象`hookcallers`用来保存每个pluggy的实际调用对象`_HookCaller`，以`plugin object:hookcallers object`的形式保存在`self._plugin2hookcallers`**
 
-<br/> 
+<br/><br/>
 
 ```python
   for name in dir(plugin):
@@ -63,7 +63,7 @@
   - **再把一个`_HookCaller`的对象添加到`hook`中，并为`self.hook`新增一个value为`hook`，name为`method name`的属性（比如前面的demo的`calculate`）**
   - **最后将遍历找到的每一个`_HookCaller`添加到hookcallers,以待调用**
 
-<br/> 
+<br/><br/>
 
 #### 我们来分析下上面代码提到的两个对象HookImpl与_HookCaller
 #### 首先看下HookImpl的实现，其实就是一个数据封装类
@@ -81,7 +81,7 @@
           return "<HookImpl plugin_name=%r, plugin=%r>" % (self.plugin_name, self.plugin)
 ```
 
-<br/><br/>
+<br/><br/><br/>
 
 #### 最后看看核心_HookCaller的实现，它是整个plugin的核心类
 ```python
@@ -101,7 +101,7 @@
  ```
   * **在register逻辑中，我们传入的参数是name与hook_execute(保存在self._hookexec中)，其中hook_execute表示的是一个函数对象，负责实际plugin的调用**
 
-<br/>
+<br/><br/>
 
 ```python
     def has_spec(self):
@@ -118,7 +118,7 @@
 ```
   * **增加调用历史记录，返回调用历史记录**
 
-<br/>
+<br/><br/>
 
 ```python
     def _add_hookimpl(self, hookimpl):
@@ -151,7 +151,7 @@
   * **在构造函数中我们可以看到`self._wrappers`和`self._nonwrappers`，通过`_add_hookimpl`我们将`plugin`分成两类**
   * **按照装饰器传入的参数对plugin的执行顺序进行排序**
 
-<br/>
+<br/><br/>
 
 ```python
     def _remove_plugin(self, plugin):
@@ -168,7 +168,7 @@
   * **remove plugin时需将`_wrappers`和`_nonwrappers`两类中的`plugin`都`remove`**
   * **通过遍历大类中的`method`的`plugin`属性来找到要删除的`plugin`，通过`del`来删除引用变量**
 
-<br/>
+<br/><br/>
 
 ```python
     def call_extra(self, methods, kwargs):
@@ -189,7 +189,7 @@
   * **对我们传入的临时`plugin method`都统一创建默认执行顺序的名为"<temp>"的临时`plugin object`**
   * **并将增加了临时`plugin`的`_HookCaller object`返回，以待调用**
 
-<br/>
+<br/><br/>
 
 ```python
     def _maybe_apply_history(self, method):

@@ -110,14 +110,14 @@
            if firstresult:  # halt further impl calls
                break
 ```
-  * #### hookwrapper
-    * #### 如果定义plugin时hookwrapper参数为True时,会先执行plugin中yield之前的代码，等其他plugin执行完才继续执行yield后面的的部分。
-    * #### `gen = hook_impl.function(*args)`执行plugin function中yield前的部分，然后停下
-    * #### `next(gen)`迭代到plugin function中yield后面的部分
-    * #### 将gen得到的generator加到teardown中，用于后续的callback
-  * #### nonwrapper
-    * #### 直接调用plugin function
-    * #### 将执行结果保存到result中
+  * **hookwrapper**
+    * **如果定义plugin时hookwrapper参数为True时,会先执行plugin中yield之前的代码，等其他plugin执行完才继续执行yield后面的的部分。**
+    * **`gen = hook_impl.function(*args)`执行plugin function中yield前的部分，然后停下**
+    * **`next(gen)`迭代到plugin function中yield后面的部分**
+    * **将gen得到的generator加到teardown中，用于后续的callback**
+  * **nonwrapper**
+    * **直接调用plugin function**
+    * **将执行结果保存到result中**
 ```python
     finally:
         if firstresult:  # first result hooks return a single value
@@ -135,14 +135,14 @@
 
         return outcome.get_result()
 ```
-  * #### 在一个hook的所有plugin实现都执行完后，所有的执行结果都要用_Result类封装
-  * #### 如果仍存在前面存入teardowns中的generator，遍历并执行这些“执行了一半的”hookwrapper
-  * #### 并将nowrapper的结果传递给hookwrapper的后半部分
-  * #### 这里不允许在一个hookwrapper使用两次yield，会导致在外部抛出异常终止逻辑 `_raise_wrapfail(gen, "has second yield")`->`RuntimeError`
-    * #### 这里详细讲下
-    * #### 当gen.send(outcome)将结果传递回hookwrapper，hookwrapper会接着往下执行，没有yield的时候会按执行完plugin的逻辑走
-    * #### 当再次遇到yield的时候，会再次跳出，跳回的位置就是这里，所以再往下执行`_raise_wrapfail(gen, "has second yield")`会抛出错误了。
-  * #### 最后将outcome的结果返回给调用方`hook_execute`->`self._hookexec`->`pm.hook.xxx(**kwargs)`
+  * **在一个hook的所有plugin实现都执行完后，所有的执行结果都要用_Result类封装**
+  * **如果仍存在前面存入teardowns中的generator，遍历并执行这些“执行了一半的”hookwrapper**
+  * **并将nowrapper的结果传递给hookwrapper的后半部分**
+  * **这里不允许在一个hookwrapper使用两次yield，会导致在外部抛出异常终止逻辑 `_raise_wrapfail(gen, "has second yield")`->`RuntimeError`**
+    * **这里详细讲下**
+    * **当gen.send(outcome)将结果传递回hookwrapper，hookwrapper会接着往下执行，没有yield的时候会按执行完plugin的逻辑走**
+    * **当再次遇到yield的时候，会再次跳出，跳回的位置就是这里，所以再往下执行`_raise_wrapfail(gen, "has second yield")`会抛出错误了。**
+  * **最后将outcome的结果返回给调用方`hook_execute`->`self._hookexec`->`pm.hook.xxx(**kwargs)`**
   
 ### 额外再看看_Result的代码，先看构造函数，就是把执行结果与执行异常信息封装到类_Result
 ```python

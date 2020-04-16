@@ -18,7 +18,8 @@ pm.hook.calculate(a=2, b=3)
 <br/>
 
 
-# `pm.register(HookImpl1())`是怎么实现的？
+# `PluginManager.register(HookImpl1())`是怎么实现的？
+**Demo中的`pm.register(HookImpl1())`是怎么实现的？**
 
 </br>
 

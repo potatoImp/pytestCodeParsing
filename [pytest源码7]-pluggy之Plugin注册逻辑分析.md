@@ -55,7 +55,7 @@
   - **最后将遍历找到的每一个`_HookCaller`添加到hookcallers,以待调用**
 #### 我们来分析下上面代码提到的两个对象HookImpl与_HookCaller
 #### 首先看下HookImpl的实现，其实就是一个数据封装类
-* ```python
+```python
   class HookImpl(object):
       def __init__(self, plugin, plugin_name, function, hook_impl_opts):
           self.function = function
@@ -67,7 +67,7 @@
 
       def __repr__(self):
           return "<HookImpl plugin_name=%r, plugin=%r>" % (self.plugin_name, self.plugin)
-  ```
+```
 #### 最后看看核心_HookCaller的实现，它是整个plugin的核心类
 ```python
   class _HookCaller(object):

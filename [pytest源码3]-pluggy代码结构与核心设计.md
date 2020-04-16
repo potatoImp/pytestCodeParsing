@@ -1,3 +1,11 @@
+# Ç°ÑÔ
+###### ¼òµ¥ÁË½âÁËpluggyÖ®ºó£¬ÎÒÃÇ»¹ĞèÒªÔÙÁË½âĞ©ÖªÊ¶£¬Îª½â¶Á´úÂëÂß¼­×ö×¼±¸
+##### ¸öÈË×¾¼û£¬ÓĞ´íÇë¸÷Î»Ö¸³ö¡£
+###### _Èç¹ûµÄÎÒµÄÎÄÕÂ¶ÔÄúÓĞ°ïÖú£¬²»·û¶¯¶¯ÄúµÄ½ğÊÖÖ¸¸ø¸öStar£¬ÓèÈËÃµ¹å£¬ÊÖÓĞÓàÏã£¬²»Ê¤¸Ğ¼¤¡£_
+</br>
+</br>
+</br>
+
 # pluggy´úÂë½á¹¹
 
 #### °´ÕÕÇ°ÃædemoÖĞµÄ´úÂëË³Ğò£¬ÔÚ·ÖÎöpluggyµÄºËĞÄÂß¼­Ö®Ç°£¬ÎÒÃÇÏÈÀ´ÁË½â`HookspecMarker`¡¢`HookspecMarker`µÄÓÃ´¦ÊÇÊ²Ã´£¿
@@ -85,7 +93,7 @@ def __call__(
 
 <br/><br/>
 
-## pluggyºËĞÄÉè¼Æ
+# pluggyºËĞÄÉè¼Æ
 #### plugyµÄºËĞÄÂß¼­¾ÍÊÇ¼¸ĞĞ´úÂë
 ```python
 pm = PluginManager("myPluggyDemo")
@@ -103,6 +111,8 @@ pm.hook.calculate(a=2, b=3)
 3. #### `pm.hook.calculate(a=2, b=3)`ÊÇÔõÃ´ÊµÏÖµÄ£¿
 
 
+### 1.`PluginManager.add_hookspecs()`ÊÇÔõÃ´ÊµÏÖµÄ£¿
+**DemoÖĞµÄ`pm.add_hookspecs(HookSpec)`ÊÇÔõÃ´ÊµÏÖµÄ£¿**
 ```python
 def add_hookspecs(self, module_or_class):
     """ add new hook specifications defined in the given module_or_class.
@@ -122,7 +132,10 @@ def parse_hookspec_opts(self, module_or_class, name):        #2.1ÄÃµ½¸ÃÊôĞÔµÄ·½·
  
  <br/>
  
-2. ### pm.register`µÄ×÷ÓÃÊÇ×¢²áÒ»¸öpluggyµÄÊµÏÖ²¢½«ÆäÓë¶ÔÓ¦µÄhook¹ØÁªÆğÀ´£¬ÎÒÃÇÀ´¿´Ö÷Òª´úÂë
+### 2.`PluginManager.register()`ÊÇÔõÃ´ÊµÏÖµÄ£¿
+**DemoÖĞµÄ`pm.register(HookImpl1())`ÊÇÔõÃ´ÊµÏÖµÄ£¿**
+ 
+**`pm.register`µÄ×÷ÓÃÊÇ×¢²áÒ»¸öpluggyµÄÊµÏÖ²¢½«ÆäÓë¶ÔÓ¦µÄhook¹ØÁªÆğÀ´£¬ÎÒÃÇÀ´¿´Ö÷Òª´úÂë**
 ```python
 # register matching hook implementations of the plugin
 self._plugin2hookcallers[plugin] = hookcallers = []
@@ -146,7 +159,11 @@ for name in dir(plugin):
   - **½«´øÓĞproject_name + _implµÄmethod·â×°³ÉÒ»¸öHookImplÖĞ**
   - **ÔÙ°ÑÒ»¸ö`_HookCaller`µÄ¶ÔÏóÌí¼Óµ½`hook`ÖĞ£¬²¢Îª`self.hook`ĞÂÔöÒ»¸övalueÎª`hook`£¬nameÎª`method`µÄÊôĞÔ£¨±ÈÈçÇ°ÃæµÄdemoµÄ`calculate`£©**
   - **×îºó½«±éÀúÕÒµ½µÄÃ¿Ò»¸ö`_HookCaller`Ìí¼Óµ½hookcallers,ÒÔ´ıµ÷ÓÃ**
-#### pm.hookÊÇÊ²Ã´£¿ÊµÏÖµ÷ÓÃpluggyµÄÂß¼­ÊÇÊ²Ã´£¿
+
+<br/>
+
+### 3.`PluginManager.hook.method()`ÊÇÔõÃ´ÊµÏÖµÄ£¿
+**pm.hookÊÇÊ²Ã´£¿ÊµÏÖµ÷ÓÃpluggyµÄÂß¼­ÊÇÊ²Ã´£¿**
 ##### ÕâÀï¾ÍÉæ¼°µ½ÁËÉÏÒ»²½µÄ`_HookCaller`ÁË£¬`pm.hook.calculate`ÆäÊµÊÇÏàµ±ÓÚ»ñÈ¡ÁË¶ÔÓ¦`_HookCaller`£¬µ÷ÓÃµÄÊÇËûµÄ`__call__`·½·¨£¬À´¿´ÏÂ´úÂë
 ```python
     def __call__(self, *args, **kwargs):

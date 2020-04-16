@@ -93,10 +93,10 @@ pm.add_hookspecs(HookSpec)
 pm.register(HookImpl1())
 pm.hook.calculate(a=2, b=3)
 ```
-* ##### 创建一个`PluginManager`对象，用于管理plugin
-* ##### 调用`add_hookspecs`, 增加一个新的hook module object（标准对象）
-* ##### 调用`register`，注册一个新的plugin object
-* ##### 通过`pm.hook`实现对与`calculate`同名的所有`plugin`的调用
+* **创建一个`PluginManager`对象，用于管理plugin**
+* **调用`add_hookspecs`, 增加一个新的hook module object（标准对象）**
+* **调用`register`，注册一个新的plugin object**
+* **通过`pm.hook`实现对与`calculate`同名的所有`plugin`的调用**
 #### 按照上面的代码逻辑来走，我们来分析三行代码的实现，以帮助我们更好的理解
 1. #### `pm.add_hookspecs(HookSpec)`是怎么实现的？
 2. #### `pm.register(HookImpl1())`是怎么实现的？
@@ -110,8 +110,8 @@ def add_hookspecs(self, module_or_class):
         spec_opts = self.parse_hookspec_opts(module_or_class, name)        #2.拿到我们前面在HookspecMarker为函数新增的那个属性project_name + _spec
 ```
 
-  - 遍历传入对象的所有属性方法列表
-  - 拿到每个属性方法，若有特殊属性`project_name + _spec`，则返回它，否则返回`None`，下面是该方法的代码展示
+  - **遍历传入对象的所有属性方法列表**
+  - **拿到每个属性方法，若有特殊属性`project_name + _spec`，则返回它，否则返回`None`，下面是该方法的代码展示**
  ```python
 def parse_hookspec_opts(self, module_or_class, name):        #2.1拿到该属性的方法实现
     method = getattr(module_or_class, name)        #此处获取到我们之前定义的hook方法
@@ -140,10 +140,10 @@ for name in dir(plugin):
         hook._add_hookimpl(hookimpl)    #将hookimpl添加到hook中
         hookcallers.append(hook)    #将遍历找到的每一个plugin hook添加到hookcallers,以待调用
 ```
-  - ##### 遍历pluggy对象的所有属性或方法（method），并获取该pluggy method的特殊`attribute` `project_name + _impl`
-  - ##### 将带有project_name + _impl的method封装成一个HookImpl中
-  - ##### 再把一个`_HookCaller`的对象添加到`hook`中，并为`self.hook`新增一个value为`hook`，name为`method`的属性（比如前面的demo的`calculate`）
-  - ##### 最后将遍历找到的每一个`_HookCaller`添加到hookcallers,以待调用
+  - **遍历pluggy对象的所有属性或方法（method），并获取该pluggy method的特殊`attribute` `project_name + _impl`**
+  - **将带有project_name + _impl的method封装成一个HookImpl中**
+  - **再把一个`_HookCaller`的对象添加到`hook`中，并为`self.hook`新增一个value为`hook`，name为`method`的属性（比如前面的demo的`calculate`）**
+  - **最后将遍历找到的每一个`_HookCaller`添加到hookcallers,以待调用**
 #### pm.hook是什么？实现调用pluggy的逻辑是什么？
 ##### 这里就涉及到了上一步的`_HookCaller`了，`pm.hook.calculate`其实是相当于获取了对应`_HookCaller`，调用的是他的`__call__`方法，来看下代码
 ```python

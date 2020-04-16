@@ -170,15 +170,17 @@ for name in dir(plugin):
         # enable_tracing will set its own wrapping function at self._inner_hookexec
         return self._inner_hookexec(hook, methods, kwargs)
 ```
-#### 顺着走到最后，发现核心其实是hook.multicall，一个PluggyManager构建时的封装函数`_multicall`
-```
+#### 顺着走到最后，发现核心其实是hook.multicall
+
+```python
 self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
             methods,
             kwargs,
             firstresult=hook.spec.opts.get("firstresult") if hook.spec else False,
         )
 ```
-```
+#### 这是一个PluggyManager构建时的封装函数`_multicall`，代码实现如下，详细逻辑留到后面再讲。
+```python
 def _multicall(hook_impls, caller_kwargs, firstresult=False):
     """Execute a call into multiple python functions/methods and return the
     result(s).

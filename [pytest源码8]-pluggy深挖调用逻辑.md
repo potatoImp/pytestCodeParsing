@@ -1,7 +1,16 @@
-## pytest-plugin深挖hook调用逻辑
+# 前言
+###### 简单了解了pluggy之后，我们还需要再了解些知识，为解读代码逻辑做准备
+##### 个人拙见，有错请各位指出。
+###### _如果的我的文章对您有帮助，不符动动您的金手指给个Star，予人玫瑰，手有余香，不胜感激。_
+</br>
+</br>
+</br>
+
+# pytest-plugin深挖hook调用逻辑
+
 ### 前面介绍了不少hook的调用逻辑，但是还有个hook_execute没接上，这里来完整的分析pm.hook.calculate(a=2, b=3)的执行过程
 ### 每当我们调用pm.hook.xxx(**kwargs)的时候，实际上是调用了_HookCaller对象的__call__方法
-* ```
+```python
     def __call__(self, *args, **kwargs):
         if args:
             raise TypeError("hook calling supports only keyword arguments")
@@ -17,39 +26,39 @@
                     stacklevel=2,
                 )
         return self._hookexec(self, self.get_hookimpls(), kwargs)
-  ```
-  * #### 从`__call__`的代码可以看到核心逻辑是最后一行的`self._hookexec`，我们可以发现这是_HookCaller的一个属性
+```
+  * **从`__call__`的代码可以看到核心逻辑是最后一行的`self._hookexec`，我们可以发现这是_HookCaller的一个属性**
 #### 我们顺着`self._hookexec`往回找到_HookCaller的构造函数
-* ```
+```
     def __init__(self, name, hook_execute, specmodule_or_class=None, spec_opts=None):
         self.name = name
         self._wrappers = []
         self._nonwrappers = []
         self._hookexec = hook_execute
-  ```
-  * #### 可以发现，这个属性是构造`_HookCaller`对象时传入的的方法，我们再往回找，看看`hook_execute`是从哪里传进来的
+```
+  * **可以发现，这个属性是构造`_HookCaller`对象时传入的的方法，我们再往回找，看看`hook_execute`是从哪里传进来的**
 #### 我们发现`hook_execute`是从PluginManager类的register方法中实例化_HookCaller时传递的
-* ```
+```python
     if hook is None:
         hook = _HookCaller(name, self._hookexec)
-  ```
+```
 #### 这是PluginManager类的一个方法，找到该方法，发现只是一个封装，继续往上找
-* ```
+```python
     def _hookexec(self, hook, methods, kwargs):
         # called from all hookcaller instances.
         # enable_tracing will set its own wrapping function at self._inner_hookexec
         return self._inner_hookexec(hook, methods, kwargs)
-  ```
+```
 #### 最后`hook_execute`其实是hook.multicall方法，也就是multicall函数的封装
-* ```
+```python
   self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
       methods,
       kwargs,
       firstresult=hook.spec.opts.get("firstresult") if hook.spec else False,
       )
-  ```
+```
 #### 往回找，没想到回到了`_HookCaller`类的`self.multicall`
-* ```
+```python
   class _HookCaller(object):
       def __init__(self, name, hook_execute, specmodule_or_class=None, spec_opts=None):
           self.name = name
@@ -59,9 +68,9 @@
           self.argnames = None
           self.kwargnames = None
           self.multicall = _multicall
-  ```
+```
 #### 最后找到了`_HookCaller`类的`_multicall`方法，分段看一下
-* ```
+```python
   def _multicall(hook_impls, caller_kwargs, firstresult=False):
       """Execute a call into multiple python functions/methods and return the
       result(s).
@@ -83,10 +92,10 @@
                               raise HookCallError(
                                   "hook call must provide argument %r" % (argname,)
                               )
-  ```
-  * #### 反转hook_impls,plugin执行从list末尾开始，这也是为什么后注册的plugin先执行的原因
-  * #### 检查参数，如果hook_impls使用的参数没有在hookspec中预先定义的话，抛出HookCallError
-* ```
+```
+  * **反转hook_impls,plugin执行从list末尾开始，这也是为什么后注册的plugin先执行的原因**
+  * **检查参数，如果hook_impls使用的参数没有在hookspec中预先定义的话，抛出HookCallError**
+```python
   if hook_impl.hookwrapper:
       try:
           gen = hook_impl.function(*args)
@@ -100,7 +109,7 @@
            results.append(res)
            if firstresult:  # halt further impl calls
                break
-  ```
+```
   * #### hookwrapper
     * #### 如果定义plugin时hookwrapper参数为True时,会先执行plugin中yield之前的代码，等其他plugin执行完才继续执行yield后面的的部分。
     * #### `gen = hook_impl.function(*args)`执行plugin function中yield前的部分，然后停下
@@ -109,7 +118,7 @@
   * #### nonwrapper
     * #### 直接调用plugin function
     * #### 将执行结果保存到result中
-* ```
+```python
     finally:
         if firstresult:  # first result hooks return a single value
             outcome = _Result(results[0] if results else None, excinfo)
@@ -125,7 +134,7 @@
                 pass
 
         return outcome.get_result()
-  ```
+```
   * #### 在一个hook的所有plugin实现都执行完后，所有的执行结果都要用_Result类封装
   * #### 如果仍存在前面存入teardowns中的generator，遍历并执行这些“执行了一半的”hookwrapper
   * #### 并将nowrapper的结果传递给hookwrapper的后半部分
@@ -136,14 +145,14 @@
   * #### 最后将outcome的结果返回给调用方`hook_execute`->`self._hookexec`->`pm.hook.xxx(**kwargs)`
   
 ### 额外再看看_Result的代码，先看构造函数，就是把执行结果与执行异常信息封装到类_Result
-* ```
+```python
   class _Result(object):
       def __init__(self, result, excinfo):
           self._result = result
           self._excinfo = excinfo
-  ```
+```
 ### 还有主要方法get_result()
-* ```
+```python
   def get_result(self):
       """Get the result(s) for this hook call.
 
@@ -158,10 +167,10 @@
           if _py3:
               raise ex[1].with_traceback(ex[2])
           _reraise(*ex)  # noqa
-  ```
-  * #### 判断`hook call`过程是有否异常。
-  * #### 无异常情况下返回`hook call`的执行结果。
-  * #### 有异常情况下，抛出基础异常类`BaseException`的回溯结果
+```
+  * **判断`hook call`过程是有否异常。**
+  * **无异常情况下返回`hook call`的执行结果。**
+  * **有异常情况下，抛出基础异常类`BaseException`的回溯结果**
   
 ## 总结
 #### 断断续续坚持扒了一个多星期pluggy源码终于扒完了，以前听说看完优秀源码会觉得自己写的东西是垃圾，现在我相信了

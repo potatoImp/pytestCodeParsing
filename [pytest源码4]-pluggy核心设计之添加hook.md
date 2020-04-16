@@ -17,7 +17,8 @@ pm.hook.calculate(a=2, b=3)
 <br/>
 <br/>
 
-## `pm.add_hookspecs(HookSpec)`是怎么实现的？
+## `PluginManager.add_hookspecs()`是怎么实现的？
+### `pm.add_hookspecs(HookSpec)`是怎么实现的？
 
 </br>
 

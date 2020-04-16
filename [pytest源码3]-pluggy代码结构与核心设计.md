@@ -55,9 +55,9 @@ def __call__(
         else:
             return setattr_hookspec_opts
 ```
-##### 通过分析`__call__`的逻辑代码可以发现，主要功能是调用了一个`setattr(object, name, value)`，给被装饰的函数新增一个属性`project_nam + _spec`，并且该属性的value为装饰器参数取值。
+**通过分析`__call__`的逻辑代码可以发现，主要功能是调用了一个`setattr(object, name, value)`，给被装饰的函数新增一个属性`project_nam + _spec`，并且该属性的value为装饰器参数取值。**
 
-#### 2.`HookspecMarker`的实现逻辑是什么?
+### 2.`HookspecMarker`的实现逻辑是什么?
 ##### `HookimplMarker`的实现逻辑类似，区别在于被装饰的函数新增的属性为`project_name + _impl`，下面只显示了部分代码
 ```python
         def setattr_hookimpl_opts(func):

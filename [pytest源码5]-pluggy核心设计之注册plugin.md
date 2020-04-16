@@ -6,6 +6,18 @@
 </br>
 </br>
 
+# pluggy核心逻辑
+```python
+pm = PluginManager("myPluggyDemo")
+pm.add_hookspecs(HookSpec)
+pm.register(HookImpl1())
+pm.hook.calculate(a=2, b=3)
+``` 
+
+<br/>
+<br/>
+
+
 # `pm.register(HookImpl1())`是怎么实现的？
 
 </br>

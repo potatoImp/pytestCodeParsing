@@ -17,7 +17,7 @@ class HookspecMarker(object):
       def __init__(self, project_name):
           self.project_name = project_name
 ```
-* ##### 我们可以传入`project_name`实例化`HookspecMarker`以获得装饰器，当我们调用`PluginManager.add_hookspec`将会寻找所有与当前`PluginManager`同`project_name`的标记函数，这也是前面要求整个项目project name一致的原因之一。
+* **我们可以传入`project_name`实例化`HookspecMarker`以获得装饰器，当我们调用`PluginManager.add_hookspec`将会寻找所有与当前`PluginManager`同`project_name`的标记函数，这也是前面要求整个项目project name一致的原因之一。**
 ```python
 def __call__(
         self, function=None, firstresult=False, historic=False, warn_on_impl=None

@@ -7,13 +7,7 @@
 </br>
 
 
-# 总结
-#### 对前面分析的源码进行一次总结，这里就不会详细的去讲了。
-#### 阅读了一遍源码之后我们再对着pluggy的demo进行总结
-
-<br/><br/>
-
-### pluggy Demo
+# 回顾一下pluggy Demo
 
 ```python
 # -*- coding:utf-8 -*-
@@ -43,7 +37,14 @@ results = pm.hook.calculate(a=1, b=5)
 print(results)
 ```
 
+<br/><br/><br/>
+
+# 总结
+#### 对前面分析的源码进行一次总结，这里就不会详细的去讲了。
+#### 阅读了一遍源码之后我们再对着pluggy的demo进行总结
+
 <br/><br/>
+
 
 ### I.
 - **首先保证项目唯一的project name是因为我们添加hook与注册pluggy时都需要利用封装类。**

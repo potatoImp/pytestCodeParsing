@@ -9,6 +9,7 @@
 # pluggy注册逻辑分析性
 
 #### 我们来详细分析一下plugin的注册逻辑register方法
+#### 下面以分片段的形式呈现
 ```python
   plugin_name = name or self.get_canonical_name(plugin)    #获取插件名
 

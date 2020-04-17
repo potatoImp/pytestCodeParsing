@@ -47,9 +47,9 @@ print(results)
 
 
 ### I.
-- **首先保证项目唯一的project name是因为我们添加hook与注册pluggy时都需要利用封装类。**
-- **装饰器将hook方法、plugin实现的引用以project name +  spec+ method 为属性名增加到封装类中。**
-- **保证唯一才能正确的找到对应的hook、plugin。**
+- 首先保证项目唯一的project name是因为我们添加hook与注册pluggy时都需要利用封装类。
+- 装饰器将hook方法、plugin实现的引用以project name +  spec+ method 为属性名增加到封装类中。
+- 保证唯一才能正确的找到对应的hook、plugin。
 
 <br/>
 

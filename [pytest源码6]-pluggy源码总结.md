@@ -1,4 +1,43 @@
-## 总结
+# 前言
+###### 简单了解了pluggy之后，我们还需要再了解些知识，为解读代码逻辑做准备
+##### 个人拙见，有错请各位指出。
+###### _如果的我的文章对您有帮助，不符动动您的金手指给个Star，予人玫瑰，手有余香，不胜感激。_
+</br>
+</br>
+</br>
+
+# pluggy Demo
+
+```python
+# -*- coding:utf-8 -*-
+
+from pluggy import PluginManager, HookspecMarker, HookimplMarker
+
+hookspec = HookspecMarker("myPluggyDemo_1") #一个声明hook method的类，每个hook method都需要用@hookspec来装饰
+hookimpl = HookimplMarker("myPluggyDemo_1") #一个plugin的实现，需要完整实现对应的hook方法，并通过@hookimpl来装饰
+
+
+class HookSpec:
+    @hookspec
+    def calculate(self, a, b):
+        pass
+
+
+class HookImpl1:
+    @hookimpl
+    def calculate(self, a, b):
+        return a + b
+
+
+pm = PluginManager("myPluggyDemo_1") #创建PluginManager对象
+pm.add_hookspecs(HookSpec)
+pm.register(HookImpl1())
+results = pm.hook.calculate(a=1, b=5)
+print(results)
+```
+
+
+# 总结
 #### 对前面分析的源码进行一次总结，这里就不会详细的去讲了。
 #### 理解了源码之后我们再来看pluggy的demo
 
